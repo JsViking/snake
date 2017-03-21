@@ -34,6 +34,7 @@ var field = {
 };
 
 var snake = {
+    speed: 300,
     length: 3,
     snakeBody: [[8,1], [8,2], [8,3]],
 
@@ -58,25 +59,29 @@ var snake = {
 };
 
 function gameCore(step, body) {
-    console.log("Идем в", step);
     let location = document.getElementById(step);
-    if (location != null && location.className == "cell") {
-        let deleteBody = body.shift();
-        body.push(step);
-        document.getElementById(deleteBody.toString()).className = "cell";
-        document.getElementById(step).className = "cell snake";
+
+    if  (location == null || location.className == "cell snake") {
+        clearInterval(timer);
+        document.getElementById("menu-wrapper").className = "";
+        document.getElementById("endGameScore").innerHTML = "Очки: " + score;
+
     } else if (location.className == "cell food") {
         location.className ="cell";
         snake.length++;
         body.push(step);
         document.getElementById(step).className = "cell snake";
         food();
-        score++
+        score++;
+        snake.speed = snake.speed - 10;
         document.getElementById("score").innerHTML = "Очки: " + score;
-    } else { if (location.className == "cell snake" || location.className == null) {
-        alert("GAME OVER!");
-        /*clearInterval(timer);*/
-    } }
+
+    } else if (location != null && location.className == "cell") {
+        let deleteBody = body.shift();
+        body.push(step);
+        document.getElementById(deleteBody.toString()).className = "cell";
+        document.getElementById(step).className = "cell snake";
+    }
 };
 
 //Расчет следующкго шага в зависимости от направления direction, заданнаго нажатием клавиш в переменной direct
@@ -133,6 +138,13 @@ function food() {
     }
 };
 
+function buttonReload() {
+    let elem = document.getElementById("button");
+    elem.addEventListener("click", function() {
+        window.location.reload();
+    });
+}
+
 function keyHandler(event) {
     switch (event.keyCode) {
         case 37: //влево
@@ -165,10 +177,11 @@ function keyHandler(event) {
 function run() {
     timer = setInterval(function(){
         snake.moveSnake();
-    }, 300);
+    }, snake.speed);
 };
 
 function init() {
+    buttonReload();
     window.addEventListener('keydown', keyHandler, false);
     keyHandler(event);
     field.makeField();

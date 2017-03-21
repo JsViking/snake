@@ -1,7 +1,8 @@
 body {
-  background: #bdb9b9;
+  background: #4ea6ca;
 }
 .table {
+  position: relative;
   z-index: 30;
   height: 23px;
   margin-left: 53px;
@@ -13,12 +14,12 @@ body {
   width: 22px;
   height: 22px;
   border: 1px solid rgba(0, 17, 0, 0.11);
-  border-radius: 4px;
+  border-radius: 5px;
   z-index: 30;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
 }
 .snake {
-  box-shadow: 0 0 10px #000000 inset;
+  box-shadow: 0 0 5px #000000 inset;
   background: #00ff09;
   z-index: 30;
   transition: background 0.1s;
@@ -38,4 +39,56 @@ body {
   font-size: 25px;
   font-weight: bold;
   transition: color 3s;
+}
+#menu-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+}
+#menu-wrapper .menu {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 250px;
+  background: #4ea6ca;
+  border-radius: 10px;
+  margin: 0 auto;
+  border: 5px black solid;
+  z-index: 150;
+}
+#menu-wrapper .menu p {
+  position: relative;
+  font-family: sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  transition: color 3s;
+  text-align: center;
+  margin: 35px 0;
+}
+#menu-wrapper .menu #button {
+  position: relative;
+  padding: 10px 15px;
+  width: 150px;
+  font-size: 25px;
+  font-weight: bold;
+  transition: color 3s;
+  text-align: center;
+  background: green;
+  border-radius: 10px;
+  margin: 0 auto;
+  cursor: pointer;
+  z-index: 1000;
+}
+#menu-wrapper .menu #button:hover {
+  opacity: 0.8;
+}
+.hide {
+  display: none;
 }
