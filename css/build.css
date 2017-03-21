@@ -1,3 +1,6 @@
+body {
+  background: #bdb9b9;
+}
 .table {
   z-index: 30;
   height: 23px;
@@ -9,7 +12,7 @@
   display: inline-block;
   width: 22px;
   height: 22px;
-  border: 1px solid #010;
+  border: 1px solid rgba(0, 17, 0, 0.11);
   border-radius: 4px;
   z-index: 30;
   transition: background-color 0.3s;
@@ -18,11 +21,21 @@
   box-shadow: 0 0 10px #000000 inset;
   background: #00ff09;
   z-index: 30;
-  transition: background 0.2s;
+  transition: background 0.1s;
 }
 .food {
   background-color: #FF0000;
   z-index: 30;
   box-shadow: 0 0 10px #000000 inset;
   transition: background-color 2s;
+}
+#score {
+  position: relative;
+  background-color: green;
+  padding: 20px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  transition: color 3s;
 }

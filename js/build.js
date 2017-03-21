@@ -1,6 +1,7 @@
 var timer = 0;
 var direct = 0;
 var directX = 0;
+var score = 0;
 
 var direction = {
     axisX: [0,1],
@@ -64,9 +65,19 @@ function gameCore(step, body) {
         body.push(step);
         document.getElementById(deleteBody.toString()).className = "cell";
         document.getElementById(step).className = "cell snake";
-        
-    }
-}
+    } else if (location.className == "cell food") {
+        location.className ="cell";
+        snake.length++;
+        body.push(step);
+        document.getElementById(step).className = "cell snake";
+        food();
+        score++
+        document.getElementById("score").innerHTML = "Очки: " + score;
+    } else { if (location.className == "cell snake" || location.className == null) {
+        alert("GAME OVER!");
+        /*clearInterval(timer);*/
+    } }
+};
 
 //Расчет следующкго шага в зависимости от направления direction, заданнаго нажатием клавиш в переменной direct
 function nextStep(head, direct) {
@@ -108,7 +119,7 @@ function nextStep(head, direct) {
 
         return (headStrX - upX) + "," +(headStrY + upY);
     }
-}
+};
 
 function food() {
     let x = Math.floor(Math.random() * field.fieldSizeX);
@@ -154,7 +165,7 @@ function keyHandler(event) {
 function run() {
     timer = setInterval(function(){
         snake.moveSnake();
-    }, 600);
+    }, 300);
 };
 
 function init() {
