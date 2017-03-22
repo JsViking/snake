@@ -16,8 +16,9 @@ var field = {
     //cоздание поля
     makeField: function() {
         for (let i =0; i < this.fieldSizeX; i++) {
+            let field = document.getElementById("field");
             let column = document.createElement('div');
-            document.body.appendChild(column);
+            field.appendChild(column);
             column.setAttribute("class", "table");
 
             for (let j = 0; j < this.fieldSizeY; j++) {
@@ -73,7 +74,13 @@ function gameCore(step, body) {
         document.getElementById(step).className = "cell snake";
         food();
         score++;
-        snake.speed = snake.speed - 10;
+
+        if (snake.speed > 50) {
+            clearInterval(timer);
+            snake.speed = snake.speed - 10;
+            run();           
+        }
+        
         document.getElementById("score").innerHTML = "Очки: " + score;
 
     } else if (location != null && location.className == "cell") {
@@ -172,21 +179,16 @@ function keyHandler(event) {
     }
 };
 
-
-
 function run() {
     timer = setInterval(function(){
         snake.moveSnake();
     }, snake.speed);
 };
 
-function init() {
+window.addEventListener("load", function(event) {
     buttonReload();
     window.addEventListener('keydown', keyHandler, false);
     keyHandler(event);
     field.makeField();
     run();
-};
-
-
-window.onload = init;
+});
